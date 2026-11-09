@@ -38,8 +38,12 @@ Each on-sheet value gets a facts row: the value, and where it lives (section, fi
 
 Crop to the claim. Cut panels the poster does not use. Replace captions and tiny annotations with short labels that read at poster distance. Keep the data. Do not redraw a curve, map, or bar from memory. If you cannot crop the real image, omit it.
 
-Do not carry the paper's graphic identity: journal template, publisher mark, or the journal's colour. Author names and affiliations go on the poster as text. A mark that happens to sit in the PDF stays out unless the user supplies a file and asks for it.
+Do not carry the paper's graphic identity: journal template, publisher mark, or the journal's colour. Author names go on the poster as text, each linked to the institution the user named for that person. Do not lift a mark out of the PDF. Search for the official logo of each linked institution.
 
 ## What the speaker keeps
 
 `docs/notes.md` holds the sentences you refused to print: parameters, the limits, what you left off, and where each placed image came from.
+
+## Then the same draft loop
+
+The compression above is the story. Draw it one block at a time, with a proof they can look at, as in [draft-loop.md](draft-loop.md). Do not paste the paper onto the sheet in one pass.

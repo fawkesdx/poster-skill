@@ -2,9 +2,15 @@
 
 Sizes are millimetres. Type is points. The drawing file uses a viewBox of 1 unit = 1 mm, and every `font-size` carries a `pt` unit.
 
+Draft proofs stay small. See [draft-loop.md](draft-loop.md). Print resolution is a separate, later export.
+
+## Reading distance
+
+The reader is about a metre away and should not squint. On A0 that means labels around 24–36 pt, and nothing under 20 pt. Section labels are larger than the labels inside the section. The title is the largest text. If they say a word is small, make it larger and show the proof. Do not answer with a smaller size.
+
 ## Size
 
-Use the venue's size and orientation. If the venue says nothing, assume A0 portrait, 841 × 1189 mm, and say so.
+Ask the size and orientation before drawing. Use the answer. A0 portrait, 841 × 1189 mm, is an offer when they do not know, and only after they say yes.
 
 | Name | mm |
 |---|---|
@@ -28,11 +34,7 @@ Readable at a walk, not at a desk.
 
 A long title gets words cut. It does not get crushed through the floor. Two lines maximum. Section headings are noun phrases. Lines on drawn art are about 2–5 pt on A0, thinner in proportion on a smaller sheet.
 
-The checker defaults match A0/A1. For a smaller sheet:
-
-```
-python scripts/check_poster.py poster.svg --expect 420x594 --min-pt 18 --warn-pt 20 --title-min-pt 36
-```
+The checker picks those floors from the page size. A short side of 420 mm or less uses the smaller row. Pass `--min-pt`, `--warn-pt`, or `--title-min-pt` only to override.
 
 ## Ink
 
@@ -53,7 +55,7 @@ Time and reading order run left to right, then top to bottom. Panel letters only
 
 ## Art
 
-Drawn parts are vector, so the type stays editable. A photograph, plot, or other raster is at least 150 pixels per inch at the size you place it, 300 if the venue asks. Record the pixel size on the image as `data-pxw` and `data-pxh`.
+Drawn parts are vector, so the type stays editable. A photograph, plot, or other raster is at least 150 pixels per inch at the size you place it, 300 if the venue asks. The checker opens the file and uses its real pixel size. `data-pxw` and `data-pxh` are a fallback when the file is not there yet, and a warning when they disagree with the file.
 
 ```xml
 <image href="art/result.png" x="16" y="640" width="400" height="260" data-pxw="2400" data-pxh="1560"/>
@@ -63,10 +65,10 @@ Links: only URLs the user gave. Prefer a short address in type that meets the fl
 
 ## Header and footer
 
-Header: title, names, affiliations, as text. No mark slot. If the user supplies mark files and asks, place those files and keep the title as text.
+Header: title, then names, then affiliations, as text. Each name is tied to the institution the user gave for that person. Search for a logo only for those linked institutions, show the files, and place them only in the order they set.
 
 Footer: one line. A limit the reader must not miss, or a short link. Not a bibliography. Not a seal.
 
 ## Thumbnail
 
-Render the proof, then look at it with the long edge about 360 px. You should see where to start and what the claim is. If you cannot, the layout is wrong. Detail will not fix it.
+Render the preview (`export_poster.py`, long edge 900 px), then look at it. You should see where to start and what the claim is. If you cannot, the layout is wrong. Detail will not fix it.

@@ -9,8 +9,12 @@ so placement can be checked at 150 pixels per inch.
 from __future__ import annotations
 
 import argparse
+import struct
 import sys
+import tempfile
+import zlib
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 XLINK = "http://www.w3.org/1999/xlink"
 
@@ -101,13 +105,21 @@ def direct_text(el: ET.Element) -> str:
     return el.text or ""
 
 
+def floors_for(width: float | None, height: float | None) -> tuple[float, float, float]:
+    short = min(width, height) if width and height else 841
+    if short <= 420:
+        return 18, 20, 36
+    return 20, 24, 60
+
+
 def check_svg(
     text: str,
     expect: str | None = None,
-    min_pt: float = 20,
-    warn_pt: float = 24,
-    title_min_pt: float = 60,
+    min_pt: float | None = None,
+    warn_pt: float | None = None,
+    title_min_pt: float | None = None,
     min_ppi: float = 150,
+    image_root: Path | None = None,
 ) -> list[tuple[str, str]]:
     findings: list[tuple[str, str]] = []
     try:
@@ -128,6 +140,14 @@ def check_svg(
             ew, eh = (float(part) for part in expect.lower().split("x"))
             if abs(width - ew) > 1 or abs(height - eh) > 1:
                 findings.append(("FAIL", f"page is {width:.0f}×{height:.0f} mm, expected {ew:.0f}×{eh:.0f} mm"))
+
+    auto_min, auto_warn, auto_title = floors_for(width, height)
+    if min_pt is None:
+        min_pt = auto_min
+    if warn_pt is None:
+        warn_pt = auto_warn
+    if title_min_pt is None:
+        title_min_pt = auto_title
 
     parent: dict[ET.Element, ET.Element | None] = {root: None}
     for el in root.iter():
@@ -161,7 +181,7 @@ def check_svg(
         if "guide" in classes(el):
             findings.append(("WARN", "guide geometry is still on the sheet"))
         if kind == "image":
-            findings.extend(_image(el, min_ppi))
+            findings.extend(_image(el, min_ppi, image_root))
         if kind not in ("text", "tspan"):
             continue
         shown = direct_text(el).strip()
@@ -221,27 +241,81 @@ def _type(
     return findings
 
 
-def _image(el: ET.Element, min_ppi: float) -> list[tuple[str, str]]:
+def image_file(href: str, image_root: Path | None) -> Path | None:
+    path = Path(href)
+    if not path.is_absolute() and image_root is not None:
+        path = image_root / href
+    return path
+
+
+def read_pixels(path: Path) -> tuple[int, int] | None:
+    try:
+        data = path.read_bytes()
+    except OSError:
+        return None
+    if data.startswith(b"\x89PNG\r\n\x1a\n") and len(data) >= 24:
+        width, height = struct.unpack(">II", data[16:24])
+        return int(width), int(height)
+    if data.startswith((b"GIF87a", b"GIF89a")) and len(data) >= 10:
+        width, height = struct.unpack("<HH", data[6:10])
+        return int(width), int(height)
+    if data[:2] != b"\xff\xd8":
+        return None
+    index = 2
+    while index + 8 < len(data):
+        if data[index] != 0xFF:
+            index += 1
+            continue
+        marker = data[index + 1]
+        if marker in (0xD8, 0xD9):
+            index += 2
+            continue
+        length = struct.unpack(">H", data[index + 2 : index + 4])[0]
+        if length < 2:
+            return None
+        if marker in (0xC0, 0xC1, 0xC2) and index + 9 <= len(data):
+            height, width = struct.unpack(">HH", data[index + 5 : index + 9])
+            return int(width), int(height)
+        index += 2 + length
+    return None
+
+
+def _image(el: ET.Element, min_ppi: float, image_root: Path | None) -> list[tuple[str, str]]:
     findings: list[tuple[str, str]] = []
     href = href_of(el)
     if not href:
         findings.append(("FAIL", "image has no href"))
         return findings
-    if href.startswith(("http://", "https://")):
+    remote = href.startswith(("http://", "https://"))
+    if remote:
         findings.append(("FAIL", "image href is remote; use a local file"))
     width, unit = parse_length(el.get("width"))
-    pxw = el.get("data-pxw")
     if width is None:
         findings.append(("WARN", f"image has no width: {href}"))
         return findings
     width_mm = to_mm(width, unit)
-    if not pxw or not el.get("data-pxh"):
-        findings.append(("WARN", f"set data-pxw and data-pxh on {href}"))
-        return findings
     if width_mm is None or width_mm <= 0:
         findings.append(("WARN", f"could not read image width in mm: {href}"))
         return findings
-    ppi = float(pxw) / (width_mm / 25.4)
+    claimed_w = el.get("data-pxw")
+    claimed_h = el.get("data-pxh")
+    path = None if remote else image_file(href, image_root)
+    real = read_pixels(path) if path is not None and path.is_file() else None
+    if path is not None and not path.is_file():
+        findings.append(("WARN", f"image file not found: {href}"))
+    if real and claimed_w and claimed_h:
+        if int(float(claimed_w)) != real[0] or int(float(claimed_h)) != real[1]:
+            findings.append(
+                ("WARN", f"{href} says {claimed_w}×{claimed_h} px but the file is {real[0]}×{real[1]} px")
+            )
+    if real:
+        pixels = real[0]
+    elif claimed_w and claimed_h:
+        pixels = float(claimed_w)
+    else:
+        findings.append(("WARN", f"set data-pxw and data-pxh on {href}"))
+        return findings
+    ppi = pixels / (width_mm / 25.4)
     if ppi < min_ppi:
         findings.append(("FAIL", f"{href} is {ppi:.0f} ppi at the placed size; need {min_ppi:.0f}"))
     return findings
@@ -258,6 +332,19 @@ def _print(findings: list[tuple[str, str]]) -> int:
         return 1
     print("no fail")
     return 0
+
+
+def _write_png(path: Path, width: int, height: int) -> None:
+    def chunk(tag: bytes, data: bytes) -> bytes:
+        return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF)
+
+    raw = b"".join(b"\x00" + b"\xff\xff\xff" * width for _ in range(height))
+    path.write_bytes(
+        b"\x89PNG\r\n\x1a\n"
+        + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0))
+        + chunk(b"IDAT", zlib.compress(raw))
+        + chunk(b"IEND", b"")
+    )
 
 
 def self_test() -> int:
@@ -324,6 +411,32 @@ def self_test() -> int:
     )
     assert any("remote" in msg for _, msg in remote if _ == "FAIL"), messages(remote)
 
+    a2 = 'xmlns="http://www.w3.org/2000/svg" width="420mm" height="594mm" viewBox="0 0 420 594"'
+    fit = check_svg(
+        f'<svg {a2}><text class="title" font-size="48pt">Title</text>'
+        '<text font-size="22pt">Label</text></svg>'
+    )
+    assert "FAIL" not in levels(fit), messages(fit)
+    small_title = check_svg(f'<svg {a2}><text class="title" font-size="30pt">Title</text></svg>')
+    assert any("title" in msg for _, msg in small_title if _ == "FAIL"), messages(small_title)
+
+    folder = Path(tempfile.mkdtemp())
+    _write_png(folder / "blur.png", 100, 80)
+    _write_png(folder / "sharp.png", 800, 640)
+    blur = check_svg(
+        f'<svg {page}><text class="title" font-size="72pt">Title</text>'
+        '<image href="blur.png" width="100" height="80" data-pxw="800" data-pxh="640"/></svg>',
+        image_root=folder,
+    )
+    assert any("ppi" in msg for _, msg in blur if _ == "FAIL"), messages(blur)
+    assert any("file is" in msg for _, msg in blur if _ == "WARN"), messages(blur)
+    real = check_svg(
+        f'<svg {page}><text class="title" font-size="72pt">Title</text>'
+        '<image href="sharp.png" width="100" height="80" data-pxw="800" data-pxh="640"/></svg>',
+        image_root=folder,
+    )
+    assert "FAIL" not in levels(real), messages(real)
+
     print("self-test ok")
     return 0
 
@@ -332,9 +445,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Check a poster SVG against poster-skill floors.")
     parser.add_argument("svg", nargs="?", help="path to the poster SVG")
     parser.add_argument("--expect", help="page size in mm, such as 841x1189")
-    parser.add_argument("--min-pt", type=float, default=20)
-    parser.add_argument("--warn-pt", type=float, default=24)
-    parser.add_argument("--title-min-pt", type=float, default=60)
+    parser.add_argument("--min-pt", type=float, default=None, help="override the floor chosen from the page size")
+    parser.add_argument("--warn-pt", type=float, default=None)
+    parser.add_argument("--title-min-pt", type=float, default=None)
     parser.add_argument("--min-ppi", type=float, default=150)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args(argv)
@@ -342,16 +455,16 @@ def main(argv: list[str] | None = None) -> int:
         return self_test()
     if not args.svg:
         parser.error("give an SVG path, or --self-test")
-    with open(args.svg, encoding="utf-8") as handle:
-        text = handle.read()
+    svg = Path(args.svg)
     return _print(
         check_svg(
-            text,
+            svg.read_text(encoding="utf-8"),
             expect=args.expect,
             min_pt=args.min_pt,
             warn_pt=args.warn_pt,
             title_min_pt=args.title_min_pt,
             min_ppi=args.min_ppi,
+            image_root=svg.parent,
         )
     )
 

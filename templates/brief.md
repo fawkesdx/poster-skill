@@ -1,10 +1,22 @@
 # Brief
 
-**Sheet:** <!-- size and orientation; note if assumed -->
+**Sheet:** <!-- their answer; not assumed -->
+
+**Title:**
+
+**Authors:** <!-- in reading order -->
+
+**Author links:** <!-- ask; do not infer -->
+
+| Author | Institution |
+|---|---|
+| | |
+
+**Logo order:** <!-- primary, then the rest, after they say so -->
 
 **Reader:**
 
-**Source:** notes | paper | mixed
+**Source:** layout | notes | paper | mixed
 
 **Takeaway:** <!-- one sentence -->
 

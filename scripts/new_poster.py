@@ -14,6 +14,7 @@ TEMPLATES = {
     "spec.md": Path("docs") / "spec.md",
     "facts.md": Path("docs") / "facts.md",
     "notes.md": Path("docs") / "notes.md",
+    "handoff.md": Path("docs") / "handoff.md",
     "poster.svg": Path("poster.svg"),
 }
 

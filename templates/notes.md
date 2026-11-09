@@ -2,6 +2,16 @@
 
 Sentences live here. The sheet keeps short labels.
 
+## Current block
+
+<!-- header, or the region now being shown -->
+
+## Locks
+
+| Leave this | Until |
+|---|---|
+| | they ask |
+
 ## What the sheet claims
 
 ## What it leaves out

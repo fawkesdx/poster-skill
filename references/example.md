@@ -2,9 +2,11 @@
 
 This is a shape for the brief and the spec. It is not a topic, and it is not wording to reuse. If the user's source does not say it, it does not go on their poster.
 
+Draw the header, show a small proof, and wait. Draw the next band only after they accept the header.
+
 ## Brief
 
-**Sheet:** A0 portrait, 841 × 1189 mm. Assumed, because no venue size was given.
+**Sheet:** A0 portrait, 841 × 1189 mm. They said yes to that offer.
 
 **Reader:** someone in the field who stops for a minute.
 
