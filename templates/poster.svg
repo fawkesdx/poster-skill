@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Units: viewBox 1 = 1 mm. Every font-size uses pt.
+  Replace every PLACEHOLDER. Delete class="guide" shapes before print.
+  No mark is drawn here. Add one only from a file the user supplied.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="841mm" height="1189mm" viewBox="0 0 841 1189">
+  <rect width="841" height="1189" fill="#f7f7f5"/>
+  <g id="header">
+    <text class="title" x="16" y="42" fill="#1a1a1a"
+          font-family="Helvetica, Arial, sans-serif" font-size="72pt" font-weight="700">PLACEHOLDER title</text>
+    <text class="authors" x="16" y="78" fill="#1a1a1a"
+          font-family="Helvetica, Arial, sans-serif" font-size="32pt">PLACEHOLDER authors</text>
+    <text class="affiliations" x="16" y="96" fill="#1a1a1a"
+          font-family="Helvetica, Arial, sans-serif" font-size="24pt">PLACEHOLDER affiliations</text>
+  </g>
+  <rect class="guide" x="16" y="120" width="809" height="480" fill="none"
+        stroke="#c8c8c8" stroke-width="0.6" stroke-dasharray="3 3"/>
+  <text class="guide" x="24" y="148" fill="#8a8a8a"
+        font-family="Helvetica, Arial, sans-serif" font-size="24pt">PLACEHOLDER upper band</text>
+  <rect class="guide" x="16" y="620" width="809" height="500" fill="none"
+        stroke="#c8c8c8" stroke-width="0.6" stroke-dasharray="3 3"/>
+  <text class="guide" x="24" y="648" fill="#8a8a8a"
+        font-family="Helvetica, Arial, sans-serif" font-size="24pt">PLACEHOLDER lower band</text>
+  <!--
+    Placed raster, after you crop it. Width and height are millimetres.
+    <image href="art/result.png" x="16" y="640" width="400" height="260"
+           data-pxw="2400" data-pxh="1560"/>
+  -->
+  <g id="footer">
+    <text class="footer" x="16" y="1160" fill="#1a1a1a"
+          font-family="Helvetica, Arial, sans-serif" font-size="24pt">PLACEHOLDER footer</text>
+  </g>
+</svg>
