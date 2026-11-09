@@ -24,4 +24,4 @@
 
 - Reading order:
 - Type colour and accent:
-- What stays inside source images:
+- What stays inside source images: <!-- data and drawn objects only; no type -->

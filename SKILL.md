@@ -24,9 +24,9 @@ Ask 1–4, 6, and 8 in one message, then wait. Do not fill a blank yourself. On 
 2. **Title.** The exact words.
 3. **Authors.** Names, in the order they should read.
 4. **Who belongs where.** For each author, which institution or institutions. One person can have more than one. Ask the link. Do not guess it by lining the two lists up.
-5. **Logos.** Search for an official logo of each institution that an author is linked to. Save the files into `art/`. Show what you found. Do not redraw a mark. This skill ships with no mark.
+5. **Logos.** Search for an official logo of each institution that an author is linked to. Use a mark from that institution's own public page, save it into `art/`, and show the file and the page it came from. Place it only after they say that file is the right mark. Do not redraw a mark. Do not take a person's photo, email, phone, or postal address from the search. This skill ships with no mark.
 6. **Logo order.** Ask which institution is home, which mark is primary, and the order of the marks (left to right, or top to bottom). Do not place a mark before they answer.
-7. **Home-institution template.** After they name the home institution, search for its official poster template. If you find one, show it and ask whether to use it. Wait. Yes: follow that template's size, colours, header, and grid, and record the choice in `docs/brief.md`. No, or none found: say so, and continue with the design steps in this skill. Do not apply a template they did not accept.
+7. **Home-institution template.** After they name the home institution, search for its official poster template on that institution's own public page. If you find one, show it and ask whether to use it. Wait. Yes: follow that template's size, colours, header, and grid, and record the choice and the page it came from in `docs/brief.md`. Do not copy sample names, sample results, or sample text off the template. No, or none found: say so, and continue with the design steps in this skill. Do not apply a template they did not accept. Do not use a file that sits behind a login.
 8. **What goes on the sheet.** Ask which they are bringing: a layout, the content in their own words, or a paper, preprint, or abstract to turn into the poster. A paper follows [references/from-paper.md](references/from-paper.md).
 
 Write the answers into `docs/brief.md`.
@@ -52,7 +52,9 @@ Poster progress:
 - [ ] Home-institution poster template searched; user chose it or declined
 - [ ] Story: what is drawn, where, which words
 - [ ] Takeaway, must-not list, facts ledger
-- [ ] Missing pictures named; handoff written if needed
+- [ ] Existing panels and objects named
+- [ ] Missing panels asked as a pictorial idea; handoff sent to the figure subagent, or the handoff file left for the user when no figure mode is available
+- [ ] Returned figures split into blank objects; type added only on the sheet
 - [ ] Current block rendered as a small proof
 - [ ] User looked and said this block can stand
 - [ ] Next block, same way
@@ -65,7 +67,13 @@ Poster progress:
 
 2. **Claims.** One takeaway sentence. A must-not list. `docs/facts.md`: every number on the sheet has a source location. No source, no ink.
 
-3. **Name what is missing.** If a picture or a result is not in the folder, say so. Write one handoff from [templates/handoff.md](templates/handoff.md). Do not invent the missing result. Do not draw past it.
+3. **Start from objects.** Prefer panels and objects the user already has. Place those files, rearrange them, and add only the new layer on top: title, names, short labels, bands, arrows. If a panel is not in the folder, do not draw the science yourself and do not invent the result. Ask the user for the pictorial idea: what the picture must show, the direction inside it, and what must not appear. Write that as one handoff from [templates/handoff.md](templates/handoff.md). Do not draw past the missing file.
+
+If this session has a subagent or a mode that draws figures, send that handoff to it. If it does not, leave the handoff file and tell the user to pass that file to their figure agent. Do not draw the figure in either case.
+
+When a figure comes back, split it into separate objects before you place it. Each object is its own piece, so a later pass can move one without redrawing the panel. Leave those objects blank of type: no title, caption, axis words, or label inside the file. Fonts go on only in the poster drawing, at poster size, so the type stays sharp at print resolution.
+
+The handoff is the pictorial idea only. It does not include the paper, a local file path, an email or phone, notes marked off the sheet, or a number the picture does not need. A picture of a person, a medical image, or a result they have not said can be shown stays off the sheet and out of the handoff until they clear that item.
 
 4. **One block.** Header, then whichever region they name. Header is about an eighth of the sheet and is shown on its own until they accept it. Title, names, and affiliations are text. Marks sit in the order from step 6 of Ask first.
 
@@ -78,6 +86,12 @@ Poster progress:
 ## Report
 
 Which block you just showed, what you left locked, what is still missing, and the proof file. On the print pass, add the board size and the export paths.
+
+## Private
+
+The poster project belongs to the user. Do not copy their poster, paper, logos, template, or notes into this skill.
+
+Do not add an email, a phone, a postal address, or a photo of a person unless they asked for that exact item. A link on the sheet is one they gave. If it contains a token or a private-share key, ask before it is printed or turned into a QR code.
 
 ## Red flags
 
@@ -92,6 +106,18 @@ Which block you just showed, what you left locked, what is still missing, and th
 - A print-resolution render before they agree
 - A paragraph on the sheet
 - A number with no facts row
+- Holding the handoff when a figure subagent is available, instead of sending it
+- Drawing the figure yourself when no figure mode is available, instead of leaving the handoff file for the user
+- Sending a handoff that contains the paper, a local path, a contact, or an uncleared picture
+- Placing a picture of a person, a medical image, or an uncleared result before they say it can be shown
+- Adding an email, phone, postal address, or photo of a person they did not ask for
+- Printing a link that contains a token or a private-share key
+- Copying sample names or sample results off an institution template
+- Using a logo or a template from behind a login, or from a page that is not the institution's own
+- Copying the user's poster, paper, or notes into this skill
+- Drawing a missing panel instead of asking for the pictorial idea
+- Placing a multi-object figure as one locked panel
+- Type, captions, or axis words baked into a figure file
 - A chopped subject, a leftover corner in a crop, or a blurred file they just resaved
 - An empty region left "for later"
 - Changing a locked title

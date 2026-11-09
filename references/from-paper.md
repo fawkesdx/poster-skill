@@ -36,7 +36,11 @@ Each on-sheet value gets a facts row: the value, and where it lives (section, fi
 
 ## Figures from the paper
 
-Crop to the claim. Cut panels the poster does not use. Replace captions and tiny annotations with short labels that read at poster distance. Keep the data. Do not redraw a curve, map, or bar from memory. If you cannot crop the real image, omit it.
+Crop to the claim. Cut panels the poster does not use. Keep the data. Do not redraw a curve, map, or bar from memory. If you cannot crop the real image, omit it and ask for the pictorial idea instead of inventing the panel. The pictorial idea goes to the figure subagent when that mode is available, and otherwise the handoff file is for the user to pass on. The paper file does not go either way.
+
+A picture of a person, a medical image, or a result the user has not said can be shown stays off the sheet until they clear that item.
+
+Split a kept figure into its objects, and leave those objects blank of type. Captions and tiny annotations come off the image. The short labels go on the poster, at poster size, when the sheet is arranged.
 
 Do not carry the paper's graphic identity: journal template, publisher mark, or the journal's colour. Author names go on the poster as text, each linked to the institution the user named for that person. Do not lift a mark out of the PDF. Search for the official logo of each linked institution.
 

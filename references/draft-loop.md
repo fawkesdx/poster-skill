@@ -40,27 +40,36 @@ Low resolution ends when they say the sheet is agreed, or they ask for the print
 
 ## Pictures from somewhere else
 
-Another chat or tool may draw an illustration. You write the handoff. You do not pretend to be that tool.
+Start from objects the user already has. Copy each one into `art/` and name which file is under discussion before it is placed. Your job on those files is to arrange them and add the poster layer on top.
+
+If a panel does not exist, ask for the pictorial idea in their words and write the handoff. If this session has a subagent or a mode that draws figures, send the handoff to that subagent. If it does not, leave the handoff file and tell the user to pass that file to their figure agent. The handoff is the pictorial idea only: no paper, no local path, no email or phone, no notes marked off the sheet, and no picture of a person, medical image, or result they have not cleared. You do not draw the figure yourself, and you do not pretend to be that agent.
 
 One picture per handoff. State:
 
+- the pictorial idea, in their words
+- the objects to return as separate files
 - where it will sit on the sheet
 - the direction inside the picture (this can differ from the band's direction on the sheet)
 - what must be visible
-- what must not appear
+- what must not appear, including any title, caption, axis words, or label
 - the file name to save into `art/`
+- the words that will be added later on the poster, not inside the picture
 
 If they paste into a chat that already has the style, write only the change. Do not repeat the standing style.
 
 When the file arrives, open that file. The newest save wins. If they say it is blurry, use the file they just saved, not an earlier copy.
 
-Copy candidates into `art/` and name which file is under discussion before it is placed.
+## Blank objects
+
+A generated figure is not ready to drop onto the sheet. Split every object inside that panel into its own piece: one curve, one map, one arrow, one module. Save each piece under its own name in `art/`. A later rearrange then moves one object and leaves the others.
+
+Strip type out of those files. The object is the picture only. Titles, captions, tick labels, axis words, and callouts are added in `poster.svg` when the poster is arranged, at the poster point size. Type drawn inside the figure is raster or the wrong size, and it goes soft when the sheet is printed. If the file that came back already has writing, ask for a blank version of the same objects, or crop the writing off, and put the words back on the sheet.
 
 ## Crop and place
 
 Crop the object, not a neighbourhood of it. No leftover corner, no chopped head, no caption from the source. If you need an arrow, crop the arrow as its own object.
 
-Place labels in the drawing, at poster size. If the source picture already has writing that fights those labels, use a clean version of the picture and put the words back yourself.
+Place labels in the drawing, at poster size.
 
 Labels sit next to the thing they name. They do not touch it, cover it, or cross an arrow. The same role uses the same size and the same baseline. A shared legend is written once.
 

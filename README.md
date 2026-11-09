@@ -21,7 +21,7 @@ The same folder works for other agents that load skills from a directory you cho
 python ~/.cursor/skills/poster-skill/scripts/new_poster.py ./my-poster
 ```
 
-That creates `docs/brief.md`, `docs/spec.md`, `docs/facts.md`, `docs/notes.md`, an empty `art/` folder, and a blank `poster.svg`. Then ask the agent to use this skill. Give it notes, or a paper.
+That creates `docs/brief.md`, `docs/spec.md`, `docs/facts.md`, `docs/notes.md`, an empty `art/` folder, and a blank `poster.svg`. Then ask the agent to use this skill. Give it the panels and objects you already have, or notes, or a paper. If a panel is missing, the agent asks for the pictorial idea. When a figure-drawing mode is available, that handoff is sent to it. When it is not, you take the handoff file to your own figure agent. The handoff carries the pictorial idea only, not the paper and not a contact. A returned figure is split into separate objects with no type inside them. Fonts are added only when the poster is arranged. The skill does not keep a copy of your poster, your paper, or your logos.
 
 From a paper, the agent reads the abstract, the figure captions, and the last section, then keeps one claim. Methods become a short flow. Extra figures stay off the sheet. Numbers on the sheet have to appear in the paper.
 

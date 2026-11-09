@@ -61,7 +61,7 @@ Drawn parts are vector, so the type stays editable. A photograph, plot, or other
 <image href="art/result.png" x="16" y="640" width="400" height="260" data-pxw="2400" data-pxh="1560"/>
 ```
 
-Links: only URLs the user gave. Prefer a short address in type that meets the floor. Add a QR image only if a local tool can make it from that URL (`qrencode` if it is installed). Do not invent a link, and do not fetch a badge.
+Links: only URLs the user gave. Prefer a short address in type that meets the floor. Add a QR image only if a local tool can make it from that URL (`qrencode` if it is installed). Do not invent a link, and do not fetch a badge. If the URL contains a token or a private-share key, ask before it is printed or encoded.
 
 ## Header and footer
 
