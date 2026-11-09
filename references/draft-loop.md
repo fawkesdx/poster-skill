@@ -88,7 +88,7 @@ Two columns that they want matched are made the same height. Squeeze one, expand
 
 ## Colour
 
-Take the palette from the pictures they brought. Push the ground toward white so the print does not flood ink. Darken the type until it stays readable on that ground.
+If they accepted a home-institution poster template, use its colours, header, and grid, and leave that ground as the template drew it. Otherwise take the palette from the pictures they brought for this poster, push the ground toward white so the print does not flood ink, and darken the type until it stays readable. Do not reuse an older poster's colours or header unless they ask for that layout.
 
 ## Locks
 

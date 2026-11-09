@@ -12,7 +12,11 @@
 |---|---|
 | | |
 
+**Home institution:**
+
 **Logo order:** <!-- primary, then the rest, after they say so -->
+
+**Institution poster template:** <!-- none found | declined | accepted, with the source -->
 
 **Reader:**
 

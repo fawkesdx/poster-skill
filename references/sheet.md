@@ -38,7 +38,7 @@ The checker picks those floors from the page size. A short side of 420 mm or les
 
 ## Ink
 
-Light paper. A full-bleed dark ground wastes ink and fails in some halls. One colour for type. One accent, used in a few places, for the claim. Colours that already live inside a source image stay there. Do not draw a second legend for them. Ignore any brand palette unless the user gives one.
+Search for the home institution's official poster template. Use its colours, header, and grid only after they say yes. If they decline, or none exists, those stay off the sheet: light paper, one colour for type, one accent for the claim. A full-bleed dark ground wastes ink unless that ground is the accepted template. Colours that already live inside a source image stay there. Do not draw a second legend for them. A confirmed logo file can still be placed in the order they set.
 
 ## Skeletons
 

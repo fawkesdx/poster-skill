@@ -2,7 +2,7 @@
 
 A generic agent skill for making a poster, or for turning a paper into one.
 
-The speaker presents the explanation. Before any drawing, the agent asks the sheet size, the title, the authors, which author belongs to which institution, the logo order, and whether the poster comes from a layout, from notes, or from a paper. It searches for each institution logo and places the marks in the order you set. Then it draws one block, shows a small proof, and waits. Print resolution comes after you agree the sheet.
+The speaker presents the explanation. Before any drawing, the agent asks the sheet size, the title, the authors, which author belongs to which institution, the logo order, and whether the poster comes from a layout, from notes, or from a paper. It searches for each institution logo and places the marks in the order you set. It also searches for the home institution's official poster template and uses that template only if you say yes. Then it draws one block, shows a small proof, and waits. Print resolution comes after you agree the sheet.
 
 ## Install
 

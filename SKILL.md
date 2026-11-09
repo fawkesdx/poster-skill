@@ -18,15 +18,16 @@ The drawing source is the file you edit (`poster.svg`, or the project's drawing 
 
 ## Ask first
 
-Ask these before any drawing, in one message, then wait. Do not fill a blank yourself. On a revise, ask only what is still blank.
+Ask 1–4, 6, and 8 in one message, then wait. Do not fill a blank yourself. On a revise, ask only what is still blank. After they answer, do 5 and 7, show what you found, and wait again before any drawing.
 
 1. **Size.** What sheet or board, and portrait or landscape? Do not assume A0. If they do not know, offer A0 portrait (841 × 1189 mm) and wait for a yes.
 2. **Title.** The exact words.
 3. **Authors.** Names, in the order they should read.
 4. **Who belongs where.** For each author, which institution or institutions. One person can have more than one. Ask the link. Do not guess it by lining the two lists up.
-5. **Logos.** Search for an official logo of each institution that an author is linked to. Save the files into `art/`. Show what you found. Do not redraw a mark.
-6. **Logo order.** Ask which institution is primary, and the order of the marks (left to right, or top to bottom). Do not place a mark before they answer.
-7. **What goes on the sheet.** Ask which they are bringing: a layout, the content in their own words, or a paper, preprint, or abstract to turn into the poster. A paper follows [references/from-paper.md](references/from-paper.md).
+5. **Logos.** Search for an official logo of each institution that an author is linked to. Save the files into `art/`. Show what you found. Do not redraw a mark. This skill ships with no mark.
+6. **Logo order.** Ask which institution is home, which mark is primary, and the order of the marks (left to right, or top to bottom). Do not place a mark before they answer.
+7. **Home-institution template.** After they name the home institution, search for its official poster template. If you find one, show it and ask whether to use it. Wait. Yes: follow that template's size, colours, header, and grid, and record the choice in `docs/brief.md`. No, or none found: say so, and continue with the design steps in this skill. Do not apply a template they did not accept.
+8. **What goes on the sheet.** Ask which they are bringing: a layout, the content in their own words, or a paper, preprint, or abstract to turn into the poster. A paper follows [references/from-paper.md](references/from-paper.md).
 
 Write the answers into `docs/brief.md`.
 
@@ -48,6 +49,7 @@ Copy this list and keep it:
 Poster progress:
 - [ ] Asked: size, title, authors, which author belongs to which institution, logo order, and source
 - [ ] Logos searched and shown
+- [ ] Home-institution poster template searched; user chose it or declined
 - [ ] Story: what is drawn, where, which words
 - [ ] Takeaway, must-not list, facts ledger
 - [ ] Missing pictures named; handoff written if needed
@@ -79,10 +81,12 @@ Which block you just showed, what you left locked, what is still missing, and th
 
 ## Red flags
 
-- Drawing before size, title, authors, the author-to-institution link, logo order, and source are answered
+- Drawing before size, title, authors, the author-to-institution link, logo order, the template choice, and source are answered
 - Assuming a sheet size
 - Skipping the logo search after an institution is named
 - Placing marks before they set the order
+- Skipping the home-institution template search
+- Applying an institution poster template before they say yes
 - Drawing the whole poster before they have seen a block
 - Asking them to approve a layout from measurements alone
 - A print-resolution render before they agree
